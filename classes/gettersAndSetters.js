@@ -4,6 +4,53 @@
  */
 
 class Worker {
+    #name;
+    #surname;
+    #rate;
+    #days;
+
+    constructor(name, surname, rate, days){
+        this.#name = name;
+        this.#surname = surname;
+        this.#rate = rate;
+        this.#days = days;
+    }
+
+    getName() {
+        return this.#name;
+    }
+
+    getSurname() {
+        return this.#surname;
+    }
+
+    getRate() {
+        return this.#rate;
+    }
+
+    getDays() {
+        return this.#days;
+    }
+
+    getSalary() {
+        return this.#rate * this.#days;
+    }
+
+    setRate(newRate){
+        if (newRate > 0) {        
+            this.#rate = newRate;
+        } else {
+            console.error("Rate must be a positive number.");
+        }
+    }
+
+    setDays(newDays){
+        if (newDays >= 0) {       
+            this.#days = newDays;
+        } else {
+            console.error("Days must be a non-negative number.");
+        }
+    }
 
 }
 

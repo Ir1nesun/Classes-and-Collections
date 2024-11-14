@@ -8,7 +8,24 @@
  */
 
 const intersection = (firstObject, secondObject) => {
-    throw new Error(`Напишите здесь свое решение ${firstObject}, ${secondObject}`);
+    if (typeof firstObject !== 'object' || firstObject === null || 
+        typeof secondObject !== 'object' || secondObject === null) {
+        return {};
+    }
+
+    const result = {};
+    
+    for (const key in firstObject) {
+        if (
+            firstObject.hasOwnProperty(key) &&
+            secondObject.hasOwnProperty(key) &&
+            firstObject[key] === secondObject[key]
+        ) {
+            result[key] = firstObject[key];
+        }
+    }
+
+    return result;
 };
 
 const data = {a: 1, b: 2};

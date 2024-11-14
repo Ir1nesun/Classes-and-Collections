@@ -6,7 +6,25 @@
  */
 
 class MyString {
+    reverse(string) {
+        if (typeof string === 'undefined') return undefined;
+        return String(string).split('').reverse().join('');
+    }
 
+    ucFirst(string) {
+        if (typeof string === 'undefined') return undefined;
+        const str = String(string).trimStart(); 
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    ucWords(string) {
+        if (typeof string === 'undefined') return undefined;
+        return String(string)
+            .trim() 
+            .split(/\s+/) 
+            .map(word => this.ucFirst(word))
+            .join(' ');
+    }
 }
 
 const str = new MyString();

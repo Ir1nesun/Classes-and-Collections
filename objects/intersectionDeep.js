@@ -8,7 +8,32 @@
  */
 
 const intersectionDeep = (firstObject, secondObject) => {
-    throw new Error(`Напишите здесь свое решение ${firstObject}, ${secondObject}`);
+    if (typeof firstObject !== 'object' || firstObject === null || 
+        typeof secondObject !== 'object' || secondObject === null) {
+        return {};
+    }
+
+    const result = {};
+
+    for (let key in firstObject) {
+        if (firstObject.hasOwnProperty(key) && secondObject.hasOwnProperty(key)) {
+            if (typeof firstObject[key] === 'object' && 
+                typeof secondObject[key] === 'object' && 
+                firstObject[key] !== null && 
+                secondObject[key] !== null) {
+
+                const nestedIntersection = intersectionDeep(firstObject[key], secondObject[key]);
+                if (Object.keys(nestedIntersection).length > 0) {
+                    result[key] = nestedIntersection;
+                }
+            } else if (firstObject[key] === secondObject[key]) {
+                result[key] = firstObject[key];
+            }
+        }
+    }
+
+    return result;
+
 };
 
 const data = {a: 1, b: {c: 3}};

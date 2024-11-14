@@ -14,7 +14,21 @@
  * @returns {string}
  */
 function hexToRgb(color) {
-    return undefined;
+    color = color.replace('#', '');
+
+    if (color.length === 3){
+        color = color.split('').map(char => char + char).join('');
+    }
+
+    const r = parseInt(color.slice(0, 2), 16);
+    const g = parseInt(color.slice(2, 4), 16);
+    const b = parseInt(color.slice(4, 6), 16);
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
+
+console.log(hexToRgb('#000000'));    
+console.log(hexToRgb('#fff'));       
+console.log(hexToRgb('#800080'));  
 
 module.exports = hexToRgb;

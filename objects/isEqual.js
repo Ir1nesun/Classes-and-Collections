@@ -7,8 +7,27 @@
  * @returns {boolean}
  */
 
-export const isEqual = (firstObject, secondObject) => {
-    throw new Error(`Напишите здесь свое решение ${firstObject} ${secondObject}`);
+ const isEqual = (firstObject, secondObject) => {
+    if (firstObject === secondObject) return true;
+
+    if (typeof firstObject !== 'object' || firstObject === null || typeof secondObject !== 'object' || secondObject === null){
+        return false;
+    }
+
+    const keys1 = Object.keys(firstObject);
+    const keys2 = Object.keys(secondObject);
+
+    if (keys1.length !== keys2.length){
+        return false;
+    }
+
+    for (let key of keys1){
+        if (firstObject[key] !== secondObject[key]){
+            return false;
+        }
+    }
+
+    return true;
 };
 
 const data = {a: 1, b: 1};

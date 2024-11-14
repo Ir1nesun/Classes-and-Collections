@@ -10,7 +10,24 @@
  * @returns {string}
  */
 function rle(value) {
-    return undefined;
+    if (!value) return "";
+
+    let compressed = "";
+    let count = 1;
+
+    for (let i = 1; i < value.length; i++){
+        if (value[i] === value[i - 1]) {
+            count++;
+        } else{
+            compressed += (count > 1 ? count : '') + value[i - 1];
+            count = 1;
+        }
+    }
+
+    compressed += (count > 1 ? count : '') + value[value.length - 1];
+    return compressed;
 }
+
+
 
 module.exports = rle;

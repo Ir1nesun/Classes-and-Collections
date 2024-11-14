@@ -22,7 +22,50 @@
  * @returns {boolean}
  */
 function hasCircularDependency(servicesMap) {
+    const visited = new Set();
+    const recStack = new Set();
+
+    function dfs(service) {
+        if (recStack.has(service)) {
+            return true;
+        }
+
+        if (visited.has(service)) {
+            return false;
+        }
+
+        visited.add(service);
+        recStack.add(service);
+
+        for (const dependency of servicesMap[service] || []) {
+            if (dfs(dependency)) {
+                return true; 
+            }
+        }
+
+        recStack.delete(service);
+
+        return false;
+    }
+
+    for (const service in servicesMap) {
+        if (dfs(service)) {
+            return true; 
+        }
+    }
+
     return false;
 }
+
+console.log(hasCircularDependency({
+    http: [],
+    apiClient: ['http'],
+}));
+
+console.log(hasCircularDependency({
+    http: ['dogsApi'],
+    apiClient: ['http'],
+    dogsApi: ['apiClient'],
+}));
 
 module.exports = hasCircularDependency;

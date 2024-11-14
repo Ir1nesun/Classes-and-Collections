@@ -12,7 +12,31 @@
  * @returns {boolean}
  */
 function parentheses(value) {
-    return undefined;
+    if (value === '') return false;
+    
+    const stack = [];
+    const brackets = {
+        '(': ')',
+        '{': '}',
+        '[': ']',
+        '<': '>'
+    };
+
+    for(let char of value){
+        if(brackets[char]){
+            stack.push(char);
+        } else {
+            const lastBracket = stack.pop();
+            if (brackets[lastBracket] !== char) {
+                return false;
+            }
+        }
+    }
+
+    return stack.length === 0;
 }
+
+console.log(parentheses('<>'));
+console.log(parentheses('<}'));
 
 module.exports = parentheses;

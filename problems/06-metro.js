@@ -17,7 +17,15 @@
  * @returns {number}
  */
 function metro(x, y) {
-    return undefined;
+    const forwardDistance = (y - x - 1 + 13) % 13;
+    const backwardDistance = (x - y - 1 + 13) % 13;
+
+    return Math.min(forwardDistance, backwardDistance);
 }
+
+console.log(metro(1, 2));    
+console.log(metro(1, 3));    
+console.log(metro(13, 1));  
+console.log(metro(1, 13));
 
 module.exports = metro;

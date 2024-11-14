@@ -14,7 +14,17 @@
  * @returns {string}
  */
 function vacation(date) {
-    return undefined;
+    const [day, month, year] = date.split('.').map(Number);
+    const startDate = new Date(year, month - 1, day);
+    startDate.setDate(startDate.getDate() + 14);
+
+    const nextDay = String(startDate.getDate()).padStart(2, '0');
+    const nextMonth = String(startDate.getMonth() + 1).padStart(2, '0');
+    const nextYear = startDate.getFullYear();
+
+    return `${nextDay}.${nextMonth}.${nextYear}`;
 }
+
+console.log(vacation('01.01.2020'));
 
 module.exports = vacation;

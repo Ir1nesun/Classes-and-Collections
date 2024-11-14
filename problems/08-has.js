@@ -13,7 +13,21 @@
  * @returns {boolean}
  */
 function has(path, object) {
-    return undefined;
+    let current = object;
+
+    for(let key of path){
+        if (current && typeof current === 'object' && Object.prototype.hasOwnProperty.call(current, key)) {
+            current = current[key];
+        } else {
+            return false;
+        }
+    }
+
+    return true;
 }
+
+console.log(has(['a'], { a: 1 }));
+console.log(has(['b'], { a: 1 }));
+console.log(has(['o', 'a'], { o: { a: 2 } }));
 
 module.exports = has;

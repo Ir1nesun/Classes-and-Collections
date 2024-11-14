@@ -5,8 +5,8 @@
  * @returns {Array} - вложенный массив
  */
 
-export const makePairs = (object) => {
-    throw new Error(`Напишите здесь свое решение ${object}`);
+ const makePairs = (object) => {
+    return Object.entries(object);
 };
 
 const data = { a: 1, b: 2 };

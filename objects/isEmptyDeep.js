@@ -9,8 +9,30 @@
  * @returns {boolean}
  */
 
-export const isEmptyDeep = (object) => {
-    throw new Error(`Напишите здесь свое решение ${object}`);
+const isEmptyDeep = (object) => {
+    if (object === '' || object === null || object === undefined || Number.isNaN(object)){
+        return true;
+    }
+
+    if(Array.isArray(object)){
+        if(object.length === 0){
+            return true;
+        }
+
+        return object.every(isEmptyDeep);
+    }
+
+    if (typeof object === 'object'){
+        const keys = Object.keys(object);
+
+        if(keys.length === 0){
+            return true;
+        }
+
+        return keys.every((key) => isEmptyDeep(object[key]));
+    }
+
+    return false;
 };
 
 const data = {a: {b: undefined}};

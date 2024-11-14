@@ -7,8 +7,8 @@
  * @returns {boolean}
  */
 
-export const isPlainObject = (element) => {
-    throw new Error(`Напишите здесь свое решение ${element}`);
+ const isPlainObject = (element) => {
+    return element !== null && typeof element === 'object' && !Array.isArray(element);
 };
 
 const data = { a: 1 };

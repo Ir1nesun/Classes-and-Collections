@@ -10,7 +10,22 @@
  */
 
 const invoke = (object, path, func, args) => {
-    throw new Error(`Напишите здесь свое решение ${object} ${path} ${func} ${args}`);
+    const pathParts = path.split('.');
+    let current = object;
+
+    for (let part of pathParts) {
+        if (current[part] !== undefined) {
+            current = current[part];
+        } else {
+            throw new Error(`Path not found: ${path}`);
+        }
+    }
+
+    if (typeof func === 'string' && typeof current[func] === 'function') {
+        return current[func](...args); 
+    } else {
+        throw new Error(`The method "${func}" is not a valid function on the object at path "${path}".`);
+    }
 };
 
 const data = {a: {b: [1, 2, 3]}}
